@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "JsonEditor",
+	"version": "1.0.0",
+	"description": "简单Json编辑器",
+	"icons":
+	{
+		"16": "resources/icon.png",
+		"48": "resources/icon.png",
+		"128": "resources/icon.png"
+	},
+	"permissions":
+	[
+		"storage"
+	],
+
+	"homepage_url": "https://github.com/sunzsh",
+    "app":
+	{
+		"launch": {
+            "local_path": "index.html"
+        }
+	},
+	
+	"omnibox": { "keyword" : "json" }
+}
