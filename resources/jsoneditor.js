@@ -1551,8 +1551,8 @@ var ModeSwitcher = /*#__PURE__*/function () {
     btnHistoryEl.classList.add('jsoneditor-history')
     container.appendChild(btnHistoryEl)
     
-    btnHistoryEl.onclick = () => {
-      var originItems = cacheDao.getItem()
+    btnHistoryEl.onclick = async () => {
+      var originItems = await cacheDao.getItem()
       var historyItems = [];
       for (let i = 0; i < originItems?.length; i++) {
         let curItem = originItems[i]
@@ -1576,7 +1576,7 @@ var ModeSwitcher = /*#__PURE__*/function () {
     btnSaveEl.classList.add('jsoneditor-history-save')
 
     btnSaveEl.onclick = () => {
-      btnHistoryEl.click()
+      cacheDao.setItem(window.JSONEditorInstance?.get())
     }
 
     container.appendChild(btnSaveEl)

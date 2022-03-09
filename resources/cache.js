@@ -4,8 +4,8 @@ class CacheDao {
     this.maxLength = 5
   }
 
-  setItem(item) {
-    let arr = this.getItem()
+  async setItem(item) {
+    let arr = await this.getItem()
     if(!Array.isArray(arr)) {
       arr = []
     }
@@ -16,12 +16,14 @@ class CacheDao {
       timestamp: Math.round(new Date() / 1000),
       value: item
     })
-    localStorage.setItem(this.key, JSON.stringify(arr))
+    localforage.setItem(this.key, arr)
   }
 
   getItem() {
     try{
-      return JSON.parse(localStorage.getItem(this.key))
+      const value = localforage.getItem(this.key)
+      console.log(value)
+      return value
     }catch(err) {
       // nothing..
     }
