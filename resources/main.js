@@ -5,6 +5,7 @@ const jsonkey = 'jsonv'
     modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
     onChange: () => {
       try {
+        console.log('change',editor.get());
         localforage.setItem(jsonkey,editor.get())
       } catch (e) {}
     },
@@ -14,8 +15,13 @@ const editor = new JSONEditor(container, options)
 async function init() {
   let json = ''
   try {
-    json = await localforage.getItem(jsonkey) || ''
-  } catch (e) {}
-  editor.setText(json)
+    json = await localforage.getItem(jsonkey) || json
+  } catch (e) { }
+  if (json) { 
+    editor.set(json)
+  } else {
+    editor.setText(json)
+  }
+  
 }
 init()
