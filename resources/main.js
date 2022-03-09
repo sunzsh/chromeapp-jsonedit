@@ -6,19 +6,16 @@ const jsonkey = 'jsonv'
     onChange: () => {
       try {
         localforage.setItem(jsonkey,editor.get())
-      } catch (e) {
-      }
+      } catch (e) {}
     },
-    
   }
  
-let json={}
-let editor
+const editor = new JSONEditor(container, options)
 async function init() {
+  let json={}
   try {
     json = await localforage.getItem(jsonkey)
-  } catch (e) {
-  }
-  editor = new JSONEditor(container, options, json)
+  } catch (e) {}
+  editor.set(json)
 }
 init()
