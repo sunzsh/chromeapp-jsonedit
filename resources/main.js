@@ -12,9 +12,9 @@ const jsonkey = 'jsonv'
  
 const editor = new JSONEditor(container, options)
 async function init() {
-  let json={}
+  let json = {}
   try {
-    json = await localforage.getItem(jsonkey)
+    json = await localforage.getItem(jsonkey) || {}
   } catch (e) {}
   editor.set(json)
 }
