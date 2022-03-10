@@ -1577,6 +1577,7 @@ var ModeSwitcher = /*#__PURE__*/function () {
 
     btnSaveEl.onclick = () => {
       cacheDao.setItem(window.JSONEditorInstance?.get())
+      toast('good','保存成功')
     }
 
     container.appendChild(btnSaveEl)

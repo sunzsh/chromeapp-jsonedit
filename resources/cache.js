@@ -21,9 +21,7 @@ class CacheDao {
 
   getItem() {
     try{
-      const value = localforage.getItem(this.key)
-      console.log(value)
-      return value
+      return localforage.getItem(this.key)
     }catch(err) {
       // nothing..
     }
