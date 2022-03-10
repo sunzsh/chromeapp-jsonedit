@@ -1348,12 +1348,15 @@ pre.jsoneditor-preview,
   opacity: 1;
 }
 
-.jsoneditor-menu a.jsoneditor-poweredBy {
+.jsoneditor-menu .jsoneditor-poweredBy {
   font-size: 8pt;
   position: absolute;
   right: 0;
   top: 0;
   padding: 10px;
+}
+.jsoneditor-menu .jsoneditor-poweredBy a {
+  font-size: 8pt;
 }
 
 .jsoneditor-navigation-bar {

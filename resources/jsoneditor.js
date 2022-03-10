@@ -7508,20 +7508,42 @@ textmode.create = function (container) {
     }
 
     if (this.mode === 'code') {
-      var poweredBy = document.createElement('a');
-      poweredBy.appendChild(document.createTextNode('powered by ace'));
-      poweredBy.href = 'https://ace.c9.io/';
-      poweredBy.target = '_blank';
-      poweredBy.className = 'jsoneditor-poweredBy';
+      var powererByWrapper = document.createElement('div');
+      powererByWrapper.appendChild(document.createTextNode('powered by '));
+      powererByWrapper.className = 'jsoneditor-poweredBy';
 
-      poweredBy.onclick = function () {
+      var ace = document.createElement('a');
+      ace.appendChild(document.createTextNode('ace'));
+      ace.href = 'https://ace.c9.io/';
+      ace.target = '_blank';
+      // poweredBy.className = 'jsoneditor-poweredBy';
+
+      ace.onclick = function () {
         // TODO: this anchor falls below the margin of the content,
         // therefore the normal a.href does not work. We use a click event
         // for now, but this should be fixed.
-        window.open(poweredBy.href, poweredBy.target, 'noreferrer');
+        window.open(ace.href, ace.target, 'noreferrer');
       };
 
-      this.menu.appendChild(poweredBy);
+
+      var github_jsoneditor = document.createElement('a');
+      github_jsoneditor.appendChild(document.createTextNode('jsoneditor'));
+      github_jsoneditor.href = 'https://github.com/josdejong/jsoneditor';
+      github_jsoneditor.target = '_blank';
+      // poweredBy.className = 'jsoneditor-poweredBy';
+
+      github_jsoneditor.onclick = function () {
+        // TODO: this anchor falls below the margin of the content,
+        // therefore the normal a.href does not work. We use a click event
+        // for now, but this should be fixed.
+        window.open(github_jsoneditor.href, github_jsoneditor.target, 'noreferrer');
+      };
+
+      powererByWrapper.appendChild(github_jsoneditor)
+      powererByWrapper.appendChild(document.createTextNode(' , '));
+
+      powererByWrapper.appendChild(ace)
+      this.menu.appendChild(powererByWrapper);
     }
   }
 
