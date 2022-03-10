@@ -1560,7 +1560,12 @@ var ModeSwitcher = /*#__PURE__*/function () {
           text: beautifyTime(curItem.timestamp),
           title: beautifyTime(curItem.timestamp),
           click: () => {
-            window.JSONEditorInstance?.setText(curItem.value)
+            try{
+              window.JSONEditorInstance?.set(curItem.value)
+              toast('good','粘贴成功')
+            }catch(err) {
+              
+            }
           }
         };
         item.className = 'jsoneditor-type-modes';
@@ -1576,8 +1581,18 @@ var ModeSwitcher = /*#__PURE__*/function () {
     btnSaveEl.classList.add('jsoneditor-history-save')
 
     btnSaveEl.onclick = () => {
-      cacheDao.setItem(window.JSONEditorInstance?.get())
-      toast('good','保存成功')
+      try{
+        let v = window.JSONEditorInstance?.get()
+        if(JSON.stringify(v) === '{}') {
+          // 空数据不处理
+          toast('warn','无数据')
+          return
+        }
+        cacheDao.setItem(v)
+        toast('good','保存成功')
+      }catch(err) {
+        toast('warn','格式异常')
+      }
     }
 
     container.appendChild(btnSaveEl)
