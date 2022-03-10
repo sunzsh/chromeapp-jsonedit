@@ -1562,7 +1562,6 @@ var ModeSwitcher = /*#__PURE__*/function () {
           click: () => {
             try{
               window.JSONEditorInstance?.set(curItem.value)
-              toast('good','粘贴成功')
             }catch(err) {
               
             }

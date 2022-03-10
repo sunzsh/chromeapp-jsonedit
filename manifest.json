@@ -1,5 +1,5 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "JsonEditor",
 	"version": "1.0.0",
 	"description": "简单Json编辑器",
