@@ -1544,6 +1544,44 @@ var ModeSwitcher = /*#__PURE__*/function () {
     frame.style.position = 'relative';
     frame.appendChild(box);
     container.appendChild(frame);
+
+    // 顶部菜单按钮-历史记录
+    var btnHistoryEl = document.createElement('div')
+    btnHistoryEl.innerText = '历史 ▾'
+    btnHistoryEl.classList.add('jsoneditor-history')
+    container.appendChild(btnHistoryEl)
+    
+    btnHistoryEl.onclick = async () => {
+      var originItems = await cacheDao.getItem()
+      var historyItems = [];
+      for (let i = 0; i < originItems?.length; i++) {
+        let curItem = originItems[i]
+        let item = {
+          text: beautifyTime(curItem.timestamp),
+          title: beautifyTime(curItem.timestamp),
+          click: () => {
+            window.JSONEditorInstance?.setText(curItem.value)
+          }
+        };
+        item.className = 'jsoneditor-type-modes';
+        historyItems.push(item);
+      } 
+      var menu = new _ContextMenu__WEBPACK_IMPORTED_MODULE_0__/* .ContextMenu */ .x(historyItems);
+      menu.show(btnHistoryEl, container);
+    }
+
+    // 顶部菜单按钮-保存
+    var btnSaveEl = document.createElement('div')
+    btnSaveEl.innerText = '保存'
+    btnSaveEl.classList.add('jsoneditor-history-save')
+
+    btnSaveEl.onclick = () => {
+      cacheDao.setItem(window.JSONEditorInstance?.get())
+      toast('good','保存成功')
+    }
+
+    container.appendChild(btnSaveEl)
+
     this.dom = {
       container: container,
       box: box,

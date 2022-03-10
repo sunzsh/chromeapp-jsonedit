@@ -25,3 +25,8 @@ async function init() {
   
 }
 init()
+// 设置JSONEditor实例
+window.JSONEditorInstance=editor
+
+
+
