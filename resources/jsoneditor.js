@@ -1544,6 +1544,58 @@ var ModeSwitcher = /*#__PURE__*/function () {
     frame.style.position = 'relative';
     frame.appendChild(box);
     container.appendChild(frame);
+
+    // 顶部菜单按钮-历史记录
+    var btnHistoryEl = document.createElement('div')
+    btnHistoryEl.innerText = '历史 ▾'
+    btnHistoryEl.classList.add('jsoneditor-history')
+    container.appendChild(btnHistoryEl)
+    
+    btnHistoryEl.onclick = async () => {
+      var originItems = await cacheDao.getItem()
+      var historyItems = [];
+      for (let i = 0; i < originItems?.length; i++) {
+        let curItem = originItems[i]
+        let item = {
+          text: beautifyTime(curItem.timestamp),
+          title: beautifyTime(curItem.timestamp),
+          click: () => {
+            try{
+              window.JSONEditorInstance?.set(curItem.value)
+            }catch(err) {
+              
+            }
+          }
+        };
+        item.className = 'jsoneditor-type-modes';
+        historyItems.push(item);
+      } 
+      var menu = new _ContextMenu__WEBPACK_IMPORTED_MODULE_0__/* .ContextMenu */ .x(historyItems);
+      menu.show(btnHistoryEl, container);
+    }
+
+    // 顶部菜单按钮-保存
+    var btnSaveEl = document.createElement('div')
+    btnSaveEl.innerText = '保存'
+    btnSaveEl.classList.add('jsoneditor-history-save')
+
+    btnSaveEl.onclick = () => {
+      try{
+        let v = window.JSONEditorInstance?.get()
+        if(JSON.stringify(v) === '{}') {
+          // 空数据不处理
+          toast('warn','无数据')
+          return
+        }
+        cacheDao.setItem(v)
+        toast('good','保存成功')
+      }catch(err) {
+        toast('warn','格式异常')
+      }
+    }
+
+    container.appendChild(btnSaveEl)
+
     this.dom = {
       container: container,
       box: box,
@@ -7456,20 +7508,42 @@ textmode.create = function (container) {
     }
 
     if (this.mode === 'code') {
-      var poweredBy = document.createElement('a');
-      poweredBy.appendChild(document.createTextNode('powered by ace'));
-      poweredBy.href = 'https://ace.c9.io/';
-      poweredBy.target = '_blank';
-      poweredBy.className = 'jsoneditor-poweredBy';
+      var powererByWrapper = document.createElement('div');
+      powererByWrapper.appendChild(document.createTextNode('powered by '));
+      powererByWrapper.className = 'jsoneditor-poweredBy';
 
-      poweredBy.onclick = function () {
+      var ace = document.createElement('a');
+      ace.appendChild(document.createTextNode('ace'));
+      ace.href = 'https://ace.c9.io/';
+      ace.target = '_blank';
+      // poweredBy.className = 'jsoneditor-poweredBy';
+
+      ace.onclick = function () {
         // TODO: this anchor falls below the margin of the content,
         // therefore the normal a.href does not work. We use a click event
         // for now, but this should be fixed.
-        window.open(poweredBy.href, poweredBy.target, 'noreferrer');
+        window.open(ace.href, ace.target, 'noreferrer');
       };
 
-      this.menu.appendChild(poweredBy);
+
+      var github_jsoneditor = document.createElement('a');
+      github_jsoneditor.appendChild(document.createTextNode('jsoneditor'));
+      github_jsoneditor.href = 'https://github.com/josdejong/jsoneditor';
+      github_jsoneditor.target = '_blank';
+      // poweredBy.className = 'jsoneditor-poweredBy';
+
+      github_jsoneditor.onclick = function () {
+        // TODO: this anchor falls below the margin of the content,
+        // therefore the normal a.href does not work. We use a click event
+        // for now, but this should be fixed.
+        window.open(github_jsoneditor.href, github_jsoneditor.target, 'noreferrer');
+      };
+
+      powererByWrapper.appendChild(github_jsoneditor)
+      powererByWrapper.appendChild(document.createTextNode(' , '));
+
+      powererByWrapper.appendChild(ace)
+      this.menu.appendChild(powererByWrapper);
     }
   }
 
