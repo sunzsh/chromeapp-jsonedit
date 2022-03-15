@@ -5,7 +5,6 @@ const jsonkey = 'jsonv'
     modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
     onChange: () => {
       try {
-        console.log('change',editor.get());
         localforage.setItem(jsonkey,editor.get())
       } catch (e) {}
     },
@@ -25,3 +24,4 @@ async function init() {
   
 }
 init()
+editor.focus()
