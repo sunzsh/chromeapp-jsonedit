@@ -27,5 +27,3 @@ init()
 
 editor.focus()
 
-// 设置JSONEditor实例
-window.JSONEditorInstance=editor
