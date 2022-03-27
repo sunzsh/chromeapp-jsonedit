@@ -1,3 +1,18 @@
+
+function getElementByClassName(classnames){ 
+	var objArray= new Array();//定义返回对象数组
+	var tags=document.getElementsByTagName("*");//获取页面所有元素
+	var index = 0;
+	for(var i in tags){
+		if(tags[i].nodeType==1){
+			if(tags[i].getAttribute("class") == classnames){ //如果某元素的class值为所需要
+				objArray[index]=tags[i];
+				index++;
+			} 
+		} 
+	} 
+	return objArray;
+}
 const container = document.getElementById('jsoneditor')
 const jsonkey = 'jsonv'
   const options = {
