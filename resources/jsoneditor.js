@@ -1601,10 +1601,6 @@ var ModeSwitcher = /*#__PURE__*/function () {
     btnSaveE2.classList.add('jsoneditor-fontsize-plus')
 	container.appendChild(btnSaveE2)
 	btnSaveE2.onclick = () => {
-       console.log('+++');
-	   let v = window.JSONEditorInstance?.get()
-	   console.log(v);
-	   //ace_scroller
 	  var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
 	  if(!font){
 		  font = 20;
@@ -1612,9 +1608,7 @@ var ModeSwitcher = /*#__PURE__*/function () {
 	  font+=5;
 	  localStorage.setItem('jsonedit_fontsize',font);
 	  var obj = getElementByClassName('ace_content');
-	  var obj2 = getElementByClassName('ace_gutter-cell');
 	  obj[0].style.fontSize=font+'px';
-	  obj2[0].style.minHeight =font+'px';
     }
 	// 顶部菜单按钮-字体缩小
 	var btnSaveE3 = document.createElement('div')
@@ -1622,26 +1616,22 @@ var ModeSwitcher = /*#__PURE__*/function () {
     btnSaveE3.classList.add('jsoneditor-fontsize-minus')
 	container.appendChild(btnSaveE3)
 	btnSaveE3.onclick = () => {
-      
-	   //ace_scroller
-	 
 		var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
-		console.log(font);
 		font-=5;
 		if(font<0){
 			font = 0;
 		}
 		localStorage.setItem('jsonedit_fontsize',font);
 		var obj = getElementByClassName('ace_content');
-		  var obj2 = getElementByClassName('ace_gutter-cell');
 		  obj[0].style.fontSize=font+'px';
-		  obj2[0].style.minHeight =font+'px';
     }
+	
     this.dom = {
       container: container,
       box: box,
       frame: frame
     };
+	
   }
   /**
    * Set focus to switcher

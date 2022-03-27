@@ -44,3 +44,11 @@ editor.focus()
 
 // 设置JSONEditor实例
 window.JSONEditorInstance=editor
+//加载时设置默认字体大小
+var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
+if(font<0){
+	font = 15;
+}
+localStorage.setItem('jsonedit_fontsize',font);
+var obj = getElementByClassName('ace_content');
+  obj[0].style.fontSize=font+'px';
