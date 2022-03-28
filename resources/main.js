@@ -14,14 +14,17 @@ const editor = new JSONEditor(container, options)
 async function init() {
   let json = ''
   try {
-    json = await localforage.getItem(jsonkey) || json
+    try{
+      json = JSON.parse(decodeURIComponent(window.location.search.substring(1)))
+    }catch(e) {
+     json = await localforage.getItem(jsonkey) || json
+    }
   } catch (e) { }
   if (json) { 
     editor.set(json)
   } else {
     editor.setText(json)
   }
-  
 }
 init()
 
