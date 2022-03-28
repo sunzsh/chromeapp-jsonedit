@@ -15,7 +15,16 @@ async function init() {
   let json = ''
   try {
     try{
-      json = JSON.parse(decodeURIComponent(window.location.search.substring(1)))
+      // 获取url后面的json字符串
+      let str = window.location.search.substring(1)
+      if ('none' == str) {
+        json = ''
+      } else {
+        if (str.length > 0) {
+          json = JSON.parse(decodeURIComponent(window.location.search.substring(1)))
+          localforage.setItem(jsonkey, json)
+        }
+      }
     }catch(e) {
      json = await localforage.getItem(jsonkey) || json
     }
