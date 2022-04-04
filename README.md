@@ -15,7 +15,7 @@
 4. 将源码的根目录拖拽到chrome中（安装成功）
 5. 在chrome中打开 `chrome://apps` ，找到“JsonEditor” 单击打开
 6. \[可选\] 方便以后进入，建议打开后，添加到收藏夹
-7. \[可选\] 可以在Alfred中配置一个workflow，快速打开（特别方便）
+7. \[可选\] 可以在Alfred中配置一个workflow，快速打开，可在地址后面追加?{query}传递参数打开自动格式化（特别方便）
 
 ## 特别鸣谢
 * [https://github.com/josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 

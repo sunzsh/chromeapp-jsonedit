@@ -14,14 +14,26 @@ const editor = new JSONEditor(container, options)
 async function init() {
   let json = ''
   try {
-    json = await localforage.getItem(jsonkey) || json
+    try{
+      // 获取url后面的json字符串
+      let str = window.location.search.substring(1)
+      if ('none' == str) {
+        json = ''
+      } else {
+        if (str.length > 0) {
+          json = JSON.parse(decodeURIComponent(window.location.search.substring(1)))
+          localforage.setItem(jsonkey, json)
+        }
+      }
+    }catch(e) {
+     json = await localforage.getItem(jsonkey) || json
+    }
   } catch (e) { }
   if (json) { 
     editor.set(json)
   } else {
     editor.setText(json)
   }
-  
 }
 init()
 
