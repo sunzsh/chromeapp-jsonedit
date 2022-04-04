@@ -17,7 +17,9 @@ async function init() {
     try{
       // 获取url后面的json字符串
       let str = window.location.search.substring(1)
-      if ('none' == str) {
+      if (!str || str == '') {
+        json = await localforage.getItem(jsonkey) || json
+      } else if ('none' == str) {
         json = ''
       } else {
         if (str.length > 0) {
