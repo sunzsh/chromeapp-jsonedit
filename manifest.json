@@ -25,5 +25,6 @@
 		"page": "background.html"
 	},
 	
-	"omnibox": { "keyword" : "json" }
+	"omnibox": { "keyword" : "json" },
+	"content_security_policy": "script-src-elem 'self' data:"
 }

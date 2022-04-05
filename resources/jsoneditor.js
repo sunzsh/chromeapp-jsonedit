@@ -1545,13 +1545,34 @@ var ModeSwitcher = /*#__PURE__*/function () {
     frame.appendChild(box);
     container.appendChild(frame);
 
+    var appendBtn = function (text, title, marginLeft = '2px', marginRight) {
+      const btnBox = document.createElement('button');
+      btnBox.type = 'button';
+      btnBox.className = 'jsoneditor-modes jsoneditor-separator';
+      btnBox.textContent = text;
+      if (title) {
+        btnBox.title = title;
+      }
+      if (marginLeft) {
+        btnBox.style.marginLeft = marginLeft;
+      }
+      if (marginRight) {
+        btnBox.style.marginRight = marginRight;
+      }
+
+
+      var btnFrame = document.createElement('div');
+      btnFrame.className = 'jsoneditor-modes';
+      btnFrame.style.position = 'relative';
+      btnFrame.appendChild(btnBox);
+      container.appendChild(btnFrame);
+      return btnBox;
+    };
+
     // 顶部菜单按钮-历史记录
-    var btnHistoryEl = document.createElement('div')
-    btnHistoryEl.innerText = '历史 ▾'
-    btnHistoryEl.classList.add('jsoneditor-history')
-    container.appendChild(btnHistoryEl)
-    
-    btnHistoryEl.onclick = async () => {
+
+    const btnHistory = appendBtn('历史 ▾', '最后5次保存过的历史', '25px', '0px');
+    btnHistory.onclick = async () => {
       var originItems = await cacheDao.getItem()
       var historyItems = [];
       for (let i = 0; i < originItems?.length; i++) {
@@ -1571,15 +1592,10 @@ var ModeSwitcher = /*#__PURE__*/function () {
         historyItems.push(item);
       } 
       var menu = new _ContextMenu__WEBPACK_IMPORTED_MODULE_0__/* .ContextMenu */ .x(historyItems);
-      menu.show(btnHistoryEl, container);
-    }
-
-    // 顶部菜单按钮-保存
-    var btnSaveEl = document.createElement('div')
-    btnSaveEl.innerText = '保存'
-    btnSaveEl.classList.add('jsoneditor-history-save')
-
-    btnSaveEl.onclick = () => {
+      menu.show(btnHistory, container);
+    };
+    
+    appendBtn('保存', '保存当前内容到历史记录', '0px').onclick = () => {
       try{
         let v = window.JSONEditorInstance?.get()
         if(JSON.stringify(v) === '{}') {
@@ -1594,37 +1610,31 @@ var ModeSwitcher = /*#__PURE__*/function () {
       }
     }
 
-    container.appendChild(btnSaveEl)
-	// 顶部菜单按钮-字体放大
-	var btnSaveE2 = document.createElement('div')
-    btnSaveE2.innerText = '放大'
-    btnSaveE2.classList.add('jsoneditor-fontsize-plus')
-	container.appendChild(btnSaveE2)
-	btnSaveE2.onclick = () => {
-	  var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
-	  if(!font){
-		  font = 20;
-	  }
-	  font+=5;
-	  localStorage.setItem('jsonedit_fontsize',font);
-	  var obj = getElementByClassName('ace_content');
-	  obj[0].style.fontSize=font+'px';
-    }
-	// 顶部菜单按钮-字体缩小
-	var btnSaveE3 = document.createElement('div')
-    btnSaveE3.innerText = '缩小'
-    btnSaveE3.classList.add('jsoneditor-fontsize-minus')
-	container.appendChild(btnSaveE3)
-	btnSaveE3.onclick = () => {
-		var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
-		font-=5;
-		if(font<0){
-			font = 0;
-		}
-		localStorage.setItem('jsonedit_fontsize',font);
-		var obj = getElementByClassName('ace_content');
-		  obj[0].style.fontSize=font+'px';
-    }
+    // 顶部菜单按钮-字体放大
+    const FONT_SIZE_KEY = 'jsonedit_fontsize'
+    appendBtn('T+', '放大字体', '25px', '0px').onclick = () => {
+      var font = parseInt(localStorage.getItem(FONT_SIZE_KEY));
+      if(!font){
+        font = 20;
+      }
+      font += 2;
+      localStorage.setItem(FONT_SIZE_KEY, font);
+      document.querySelector('.ace_editor').style.fontSize = font+'px';
+    };
+
+	  // 顶部菜单按钮-字体缩小
+    appendBtn('T-', '缩小字体', '0px', '0px').onclick = () => {
+      var font = parseInt(localStorage.getItem(FONT_SIZE_KEY));
+      if(!font){
+        font = 20;
+      }
+      if (font <= 12) {
+        return;
+      }
+      font -= 2;
+      localStorage.setItem(FONT_SIZE_KEY, font);
+      document.querySelector('.ace_editor').style.fontSize = font+'px';
+    };
 	
     this.dom = {
       container: container,
@@ -1636,7 +1646,6 @@ var ModeSwitcher = /*#__PURE__*/function () {
   /**
    * Set focus to switcher
    */
-
 
   _createClass(ModeSwitcher, [{
     key: "focus",
