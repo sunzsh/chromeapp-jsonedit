@@ -4,7 +4,7 @@
 
 基于 [josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 封装的chrome插件，喜欢简洁的朋友一定要试试！
 
-![效果图](https://raw.githubusercontent.com/sunzsh/chromeapp-jsonedit/master/screenshot.png)
+![效果图](https://raw.githubusercontent.com/sunzsh/chromeapp-jsonedit/506bbb4c14878fe97a3e80d400a6231cf2f78f90/screenshot.png)
 
 ## 使用方法
 > 由于chrome目前已经不支持app类型的插件上架应用商店了，所以只能下载源码后自己安装了（很简单）
