@@ -1595,12 +1595,43 @@ var ModeSwitcher = /*#__PURE__*/function () {
     }
 
     container.appendChild(btnSaveEl)
-
+	// 顶部菜单按钮-字体放大
+	var btnSaveE2 = document.createElement('div')
+    btnSaveE2.innerText = '放大'
+    btnSaveE2.classList.add('jsoneditor-fontsize-plus')
+	container.appendChild(btnSaveE2)
+	btnSaveE2.onclick = () => {
+	  var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
+	  if(!font){
+		  font = 20;
+	  }
+	  font+=5;
+	  localStorage.setItem('jsonedit_fontsize',font);
+	  var obj = getElementByClassName('ace_content');
+	  obj[0].style.fontSize=font+'px';
+    }
+	// 顶部菜单按钮-字体缩小
+	var btnSaveE3 = document.createElement('div')
+    btnSaveE3.innerText = '缩小'
+    btnSaveE3.classList.add('jsoneditor-fontsize-minus')
+	container.appendChild(btnSaveE3)
+	btnSaveE3.onclick = () => {
+		var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
+		font-=5;
+		if(font<0){
+			font = 0;
+		}
+		localStorage.setItem('jsonedit_fontsize',font);
+		var obj = getElementByClassName('ace_content');
+		  obj[0].style.fontSize=font+'px';
+    }
+	
     this.dom = {
       container: container,
       box: box,
       frame: frame
     };
+	
   }
   /**
    * Set focus to switcher

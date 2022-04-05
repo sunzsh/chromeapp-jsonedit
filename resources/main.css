@@ -24,3 +24,10 @@
   background-color: beige;
   cursor: pointer;
 }
+.jsoneditor-fontsize-plus,.jsoneditor-fontsize-minus{
+	line-height: 31px;
+    margin-left: 10px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+}
