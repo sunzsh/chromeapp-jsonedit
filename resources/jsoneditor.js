@@ -1572,7 +1572,7 @@ var ModeSwitcher = /*#__PURE__*/function () {
     // 顶部菜单按钮-历史记录
 
     const btnHistory = appendBtn('历史 ▾', '最后5次保存过的历史', '25px', '0px');
-    btnHistory.onclick = async () => {
+    btnHistory.onclick = async (e) => {
       var originItems = await cacheDao.getItem()
       var historyItems = [];
       for (let i = 0; i < originItems?.length; i++) {
@@ -1593,9 +1593,10 @@ var ModeSwitcher = /*#__PURE__*/function () {
       } 
       var menu = new _ContextMenu__WEBPACK_IMPORTED_MODULE_0__/* .ContextMenu */ .x(historyItems);
       menu.show(btnHistory, container);
+      e.target.blur()
     };
     
-    appendBtn('保存', '保存当前内容到历史记录', '0px').onclick = () => {
+    appendBtn('保存', '保存当前内容到历史记录', '0px').onclick = (e) => {
       try{
         let v = window.JSONEditorInstance?.get()
         if(JSON.stringify(v) === '{}') {
@@ -1608,11 +1609,12 @@ var ModeSwitcher = /*#__PURE__*/function () {
       }catch(err) {
         toast('warn','格式异常')
       }
+      e.target.blur()
     }
 
     // 顶部菜单按钮-字体放大
     const FONT_SIZE_KEY = 'jsonedit_fontsize'
-    appendBtn('T+', '放大字体', '25px', '0px').onclick = () => {
+    appendBtn('T+', '放大字体', '25px', '0px').onclick = (e) => {
       var font = parseInt(localStorage.getItem(FONT_SIZE_KEY));
       if(!font){
         font = 20;
@@ -1620,10 +1622,11 @@ var ModeSwitcher = /*#__PURE__*/function () {
       font += 2;
       localStorage.setItem(FONT_SIZE_KEY, font);
       document.querySelector('.ace_editor').style.fontSize = font+'px';
+      e.target.blur()
     };
 
 	  // 顶部菜单按钮-字体缩小
-    appendBtn('T-', '缩小字体', '0px', '0px').onclick = () => {
+    appendBtn('T-', '缩小字体', '0px', '0px').onclick = (e) => {
       var font = parseInt(localStorage.getItem(FONT_SIZE_KEY));
       if(!font){
         font = 20;
@@ -1634,6 +1637,7 @@ var ModeSwitcher = /*#__PURE__*/function () {
       font -= 2;
       localStorage.setItem(FONT_SIZE_KEY, font);
       document.querySelector('.ace_editor').style.fontSize = font+'px';
+      e.target.blur()
     };
 	
     this.dom = {
