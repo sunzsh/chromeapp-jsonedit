@@ -24,19 +24,34 @@ const jsonkey = 'jsonv'
       } catch (e) {}
     },
   }
- 
+const mode = window.location.search.substring(1)
+
 const editor = new JSONEditor(container, options)
 async function init() {
   let json = ''
   try {
-    json = await localforage.getItem(jsonkey) || json
+    try{
+      // 获取url后面的json字符串
+      if (!mode || mode == '') {
+        json = await localforage.getItem(jsonkey) || json
+      } else if ('none' == mode) {
+        json = ''
+      } else if ('clipboard' == mode) {
+        chrome.runtime.sendMessage({}, function (response){
+          json = response.clipboard;
+          editor.set(JSON.parse(json))
+        });
+        return
+      }
+    }catch(e) {
+     json = await localforage.getItem(jsonkey) || json
+    }
   } catch (e) { }
   if (json) { 
     editor.set(json)
   } else {
     editor.setText(json)
   }
-  
 }
 init()
 
@@ -44,6 +59,7 @@ editor.focus()
 
 // 设置JSONEditor实例
 window.JSONEditorInstance=editor
+
 //加载时设置默认字体大小
 var font = parseInt(localStorage.getItem('jsonedit_fontsize'));
 if(font<0){

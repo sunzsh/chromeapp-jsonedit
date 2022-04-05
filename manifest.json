@@ -11,7 +11,7 @@
 	},
 	"permissions":
 	[
-		"storage"
+		"storage", "clipboardRead"
 	],
 	"homepage_url": "https://github.com/sunzsh",
     "app":
@@ -19,6 +19,10 @@
 		"launch": {
             "local_path": "index.html"
         }
+	},
+	"background": {
+		"persistent": true,
+		"page": "background.html"
 	},
 	
 	"omnibox": { "keyword" : "json" }
