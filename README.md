@@ -6,6 +6,16 @@
 
 ![效果图](https://raw.githubusercontent.com/sunzsh/chromeapp-jsonedit/506bbb4c14878fe97a3e80d400a6231cf2f78f90/screenshot.png)
 
+## 更新记录
+### 2022-04-06
+1. 支持在地址后追加参数来指定打开方式，例如：`...index.html?clipboard`
+    * `无参数` 默认加载最后一次编辑过的json
+    * `none` 打开一个空的编辑器
+    * `clipboard` 自动读取剪切板里的内容加载并格式化
+2. 支持字体缩放并记忆
+3. 恢复支持了格式错误的提醒
+4. 重构了自定义按钮的样式
+
 ## 使用方法
 > 由于chrome目前已经不支持app类型的插件上架应用商店了，所以只能下载源码后自己安装了（很简单）
 
@@ -21,3 +31,5 @@
 ## 特别鸣谢
 * [https://github.com/josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 
 * [sungf](https://github.com/sungf) 、 [zhaoeryu](https://github.com/zhaoeryu)  贡献的源码提供了历史记录的功能
+* [git-403](https://github.com/git-403) 贡献了加载加载剪切板的代码和思路
+* [Cherry-toto](https://github.com/Cherry-toto) 贡献了字体缩放的初始代码
