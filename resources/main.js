@@ -9,23 +9,24 @@ const jsonkey = 'jsonv'
       } catch (e) {}
     },
   }
- 
+const mode = window.location.search.substring(1)
+
 const editor = new JSONEditor(container, options)
 async function init() {
   let json = ''
   try {
     try{
       // 获取url后面的json字符串
-      let str = window.location.search.substring(1)
-      if (!str || str == '') {
+      if (!mode || mode == '') {
         json = await localforage.getItem(jsonkey) || json
-      } else if ('none' == str) {
+      } else if ('none' == mode) {
         json = ''
-      } else {
-        if (str.length > 0) {
-          json = JSON.parse(decodeURIComponent(window.location.search.substring(1)))
-          localforage.setItem(jsonkey, json)
-        }
+      } else if ('clipboard' == mode) {
+        chrome.runtime.sendMessage({}, function (response){
+          json = response.clipboard;
+          editor.set(JSON.parse(json))
+        });
+        return
       }
     }catch(e) {
      json = await localforage.getItem(jsonkey) || json
@@ -43,3 +44,5 @@ editor.focus()
 
 // 设置JSONEditor实例
 window.JSONEditorInstance=editor
+
+
