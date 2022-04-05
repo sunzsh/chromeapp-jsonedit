@@ -29,7 +29,7 @@
 8. \[可选\] 可以配合安装 [alfred插件](https://github.com/sunzsh/favoritesWorkflow4Alfred/blob/main/jsonEditor.alfredworkflow) 快速打开（支持按住command自动加载剪切板内json）
 
 ## 特别鸣谢
-* [https://github.com/josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 
+* ★★★ 没有 [Jos de Jong](https://github.com/josdejong) 开源的 [josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) ，就不会有这个小工具
 * [sungf](https://github.com/sungf) 、 [zhaoeryu](https://github.com/zhaoeryu)  贡献的源码提供了历史记录的功能
 * [git-403](https://github.com/git-403) 贡献了加载加载剪切板的代码和思路
 * [Cherry-toto](https://github.com/Cherry-toto) 贡献了字体缩放的初始代码
