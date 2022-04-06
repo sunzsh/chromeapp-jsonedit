@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "JsonEditor",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "简单Json编辑器",
 	"icons":
 	{
