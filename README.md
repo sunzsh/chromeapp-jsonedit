@@ -2,9 +2,10 @@
 
 ## 简介
 
-基于 [josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 封装的chrome插件，喜欢简洁的朋友一定要试试！
+基于 [josdejong/jsoneditor](https://github.com/josdejong/jsoneditor) 封装的chrome插件，喜欢简洁的朋友一定要试试！（效果视频：https://v.douyin.com/NpY9VNd/ ）
 
 ![效果图](https://raw.githubusercontent.com/sunzsh/chromeapp-jsonedit/506bbb4c14878fe97a3e80d400a6231cf2f78f90/screenshot.png)
+
 
 ## 更新记录
 ### 2022-04-06
