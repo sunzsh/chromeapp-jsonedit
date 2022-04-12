@@ -24,7 +24,9 @@ async function init() {
       } else if ('clipboard' == mode) {
         chrome.runtime.sendMessage({}, function (response){
           json = response.clipboard;
-          editor.set(JSON.parse(json))
+          try {
+            editor.set(JSON.parse(json))
+          } catch(e) { }
         });
         return
       }
