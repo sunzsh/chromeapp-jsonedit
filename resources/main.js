@@ -16,22 +16,9 @@ async function init() {
   let json = ''
   try {
     try{
-      // 获取url后面的json字符串
-      if (!mode || mode == '') {
-        json = await localforage.getItem(jsonkey) || json
-      } else if ('none' == mode) {
-        json = ''
-      } else if ('clipboard' == mode) {
-        chrome.runtime.sendMessage({}, function (response){
-          json = response.clipboard;
-          try {
-            editor.set(JSON.parse(json))
-          } catch(e) { }
-        });
-        return
-      }
+      json = await localforage.getItem(jsonkey) || json
     }catch(e) {
-     json = await localforage.getItem(jsonkey) || json
+     
     }
   } catch (e) { }
   if (json) { 
