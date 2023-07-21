@@ -2,7 +2,7 @@
 	"name": "JsonEditor",
 	"short_name": "JsonEditor",
 	"display": "standalone",
-	"start_url": "/",
+	"start_url": "./index.html",
 	"icons":
 	[{
 		"src": "resources/icon.png",
