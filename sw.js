@@ -1,7 +1,7 @@
 // sw.js
-var cacheName = 'bs-0-2-0';
+var cacheName = 'jsonedit.sunzsh';
 var cacheFiles = [
-    '/',
+    './',
     './index.html',
     './resources/img/jsoneditor-icons.svg',
     './resources/cache.js',
