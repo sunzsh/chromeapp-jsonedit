@@ -22,12 +22,17 @@ async function init() {
       } else if ('none' == mode) {
         json = ''
       } else if ('clipboard' == mode) {
-        chrome.runtime.sendMessage({}, function (response){
-          json = response.clipboard;
-          try {
-            editor.set(JSON.parse(json))
-          } catch(e) { }
-        });
+          navigator.clipboard.readText()
+          .then(clipText => editor.set(JSON.parse(clipText)))
+          .catch(err => {
+            const msg = err + ''
+            console.error(msg)
+            if (msg.indexOf('permission') > -1) {
+              toast('bad','缺少剪切板权限')
+            } else if (msg.indexOf('focused') > -1) {
+              toast('bad','浏览器没有获取焦点，无法获取剪切板内容')
+            }
+          })
         return
       }
     }catch(e) {

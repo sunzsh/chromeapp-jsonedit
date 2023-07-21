@@ -4,6 +4,7 @@
   <meta charset="utf-8">
 
   <title>JSONEditor</title>
+  <link rel="manifest" href="manifest.json" />
 
   <script src="./resources/cache.js"></script>
   
@@ -16,7 +17,6 @@
   <script src="./resources/jsoneditor.js"></script>
   <script src="./resources/toast.min.js"></script>
 
-  
 
   <style type="text/css">
     body {
@@ -41,5 +41,15 @@
 <body>
 <div id="jsoneditor"></div>
 <script src="./resources/main.js"></script>
+
+  
+<script>
+// sw.js
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(function () {
+        console.log('Service Worker 注册成功');
+    });
+}
+</script>
 </body>
 </html>
