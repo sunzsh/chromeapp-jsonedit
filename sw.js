@@ -2,7 +2,11 @@
 var cacheName = 'jsonedit.sunzsh';
 var cacheFiles = [
     './',
+    './?clipboard',
+    './?none',
     './index.html',
+    './index.html?clipborad',
+    './index.html?none',
     './resources/img/jsoneditor-icons.svg',
     './resources/cache.js',
     './resources/jsoneditor.css',
